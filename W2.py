@@ -13,7 +13,7 @@ print(len(data))
 print(len(data.columns))
 data2 = data.ix[:, ["country", "suicideper100th", "alcconsumption", "urbanrate", "incomeperperson"]] #subsetting the needed columns
 
-### As the data is quite sparse and specific values would have been very few, I decided to divide the countries into ten bins based
+### As the data is quite sparse and specific values would have been very few, I decided to divide the countries into ten bins starting from the smallest value and ending in the highest
 
 # variables from my codebook
 variables = ["suicideper100th", "alcconsumption", "urbanrate", "incomeperperson"]
