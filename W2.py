@@ -30,7 +30,7 @@ for i in variables:
     # converts all the variables to numeric
     data2[i]=pd.to_numeric(data2[i])
     # make the binsize as 10 equally big parts based on the difference between the min and max values
-    binSize = int(round((int(data2[i].max())-int(data2[i].min()))/10.0))
+    # my first attempt at dividing the binsize, easier to just use an integer: binSize = (data2[i].max()-data2[i].min())/10.0
     
     #prints the introtext for the variable
     print texts[i]
@@ -39,13 +39,13 @@ for i in variables:
     print "The values of", i, "range from", int(data2[i].min()), "in", data2.get_value(data2[i].argmin(), "country"), "to", int(data2[i].max()), "in", data2.get_value(data2[i].argmax(), "country")
     
     # creates the counts for each of the bins
-    vals = data2[i].value_counts(sort = False, bins = range(int(data2[i].min()), int(data2[i].max()+binSize), binSize), dropna = False)
+    vals = data2[i].value_counts(sort = False, bins = 10, dropna = False) #here is my first attempt at the binsize-range, proved to be too silly: np.arange(data2[i].min(), data2[i].max()+binSize, binSize), binSize)
     print vals
     print "number of entries", sum(vals), "with", (len(data))-sum(vals), "values missing"
     
     # creates the normalized bin counts
-    percentage = data2[i].value_counts(sort = False, bins = range(int(data2[i].min()), int(data2[i].max()+binSize), binSize), normalize = True, dropna = False)
+    percentage = data2[i].value_counts(sort = False, bins = 10, normalize = True, dropna = False) #bins = np.arange(int(data2[i].min()), int(data2[i].max()+binSize), binSize)
     print percentage
     print "total percentage", sum(percentage)
-    
+ 
 
