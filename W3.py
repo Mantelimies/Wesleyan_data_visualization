@@ -13,16 +13,19 @@ print(len(data))
 print(len(data.columns))
 data2 = data.ix[:, ["country", "suicideper100th", "alcconsumption", "urbanrate", "incomeperperson"]] #subsetting the needed columns
 
+data2["alcper1000dollar"] = data2["alcconsumption"] / (data2["incomeperperson"] / 1000) #adding the new composite variables
+data2["suicideper100thper1000dollar"] = data2["suicideper100th"] / (data2["incomeperperson"] / 1000)
+
 ### As the data is quite sparse and specific values would have been very few, I decided to divide the countries into ten bins starting from the smallest value and ending in the highest
 
 # variables from my codebook
-variables = ["suicideper100th", "alcconsumption", "urbanrate", "incomeperperson"]
+variables = ["suicideper100th", "alcconsumption", "urbanrate", "incomeperperson","alcper1000dollar", "suicideper100thper1000dollar"]
 
 # texts copied directly from the gapminder codebook
 texts = {"suicideper100th" : "2005 Suicide, age adjusted, per 100 000. Mortality due to self-inflicted injury, per 100 000 standard population, age adjusted", 
     "alcconsumption" : "2008 alcohol consumption per adult (age 15+), litres. Recorded and estimated average alcohol consumption, adult (15+) per capita consumption in litres pure alcohol", 
     "urbanrate" : "2008 urban population (% of total) Urban population refers to people living in urban areas as defined by national statistical offices (calculated using World Bank population estimates and urban ratios from the United Nations World Urbanization Prospects)", 
-    "incomeperperson":"2010 Gross Domestic Product per capita in constant 2000 US$. The inflation but not the differences in the cost of living between countries has been taken into account."}
+    "incomeperperson":"2010 Gross Domestic Product per capita in constant 2000 US$. The inflation but not the differences in the cost of living between countries has been taken into account.", "suicideper100thper1000dollar":"Ratio of suicides per income", "alcper1000dollar": "Ratio of alcohol consumption per income"}
 
 # creates a loop that goes through all the different variables
 for i in variables:
